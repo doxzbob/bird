@@ -98,7 +98,8 @@ struct filter_roa_reloader {
 static void filter_roa_reloader_notify(void *self, const rt_notify_data *data UNUSED) {
   struct filter_roa_reloader *frr = self;
   debug("notify %p\n", frr);
-  frr->slot->reloader(frr->slot);
+  if (frr->slot->reloader)
+    frr->slot->reloader(frr->slot);
 }
 
 static void filter_roa_reloader_unsubscribe(struct filter_notifier *n) {
